@@ -3,10 +3,11 @@
 #include "helpers_2.c"
 #include <string.h>
 
-
 int main() {
     int menuInput;
-    
+	GameState game;
+	int output[25];
+	
     do {
         printf("\n=== CODENAMES GAME (blue team setup first then red team) ===\n");
         printf("MENU: \n");
@@ -19,9 +20,15 @@ int main() {
         switch(menuInput) {
             case 1:
                 newGame();
+             
                 break;
             case 2:
                 printf("Top Spymaster feature coming soon!\n");
+                wordRandom(output);
+				loadWords(&game, output);
+                displayBoard(&game);
+        		
+                
                 break;
             case 0:
                 printf("Goodbye!\n");
