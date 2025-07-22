@@ -77,7 +77,7 @@ void displayBoard(GameState *game){
      int rows, cols;   
 	   
    for (rows = 0; rows < 5; rows++){
-      printf("==============================================+============================================\n");
+      printf("+============================================+============================================+\n");
         for (cols = 0; cols <5; cols++)
         {
         	if(game->grid[rows][cols].isRevealed==0){
@@ -89,7 +89,7 @@ void displayBoard(GameState *game){
         }
         printf("|\n");
     }
-    printf("===============================================+===========================================\n");	
+    printf("+============================================+============================================+\n");	
 }
 
 #endif // HELPERS_2_C; Include this to prevent redefinition error

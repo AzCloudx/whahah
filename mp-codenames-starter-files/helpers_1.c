@@ -2,6 +2,8 @@
 #define HELPERS_1_C
 #include <stdio.h>
 #include <string.h>
+#include<stdlib.h>
+#include<time.h>
 #include "defs.h"
 
 // Function to load players from players.txt for specific team
@@ -182,8 +184,8 @@ void manageTeam(Team *team, const char *teamName) {
 }
 
 void newGame() {
-    Team blueTeam = {0};
-    Team redTeam = {0};
+    Team blueTeam ;
+    Team redTeam;
    
     printf("\n=== NEW GAME SETUP ===\n");
    
@@ -208,5 +210,49 @@ void newGame() {
     }
     printf("\n");
 }
+/**
+* <Description of what the function does>
+* @param <filenames[20]> <o build filenames like "01.txt", "20.txt", etc.>
+* @param <maxFiles[20][21]> <to store the filenames that really exist. 20 is for the number 21 is for the names>
+* @param <filesFound> <Tracks how many valid files were found>
+* @param <choice> <randomly chosen number to be used>
+* ...
+* @param <nameN> <description of parameter N>
+* @return <description of the return value>
+* @pre <keycard folder and files must exist>
+*/
+
+void selectCard(char maxFiles[20][50], int *filesFound){
+	int i=20;
+	char filenames[20];
+	int choice;
+	char line[50];
+	
+	while(i--){
+			sprintf(filenames,"keycard/%02d.txt", i); // creates "01.txt", "02.txt", etc. minimim width 2 digits, if fewer than, 2 pads with a 0
+		FILE* fp=fopen(filenames,"r");
+		if (fp!=NULL){
+				fclose(fp); //Immediately close since we only wanted to know if it exists
+			strcpy(maxFiles[*filesFound], filenames);
+			++*filesFound;
+		} 
+	}
+
+		srand(time(NULL));
+		choice = rand() % *filesFound;
+		printf("Random File Chosen %s\n", maxFiles[choice]);
+		
+		FILE* selected=fopen(maxFiles[choice], "r");
+		if(selected!=NULL){
+			while(fscanf(selected, "%s", line)==1){
+				printf("%s", line);
+			}
+			fclose(selected);
+		} else {
+			printf("Could not open the file\n");
+		}
+	
+}
+
 
 #endif

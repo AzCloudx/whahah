@@ -7,6 +7,8 @@ int main() {
     int menuInput;
 	GameState game;
 	int output[25];
+	char maxFiles[20][50];
+	int filesFound = 0; 
 	
     do {
         printf("\n=== CODENAMES GAME (blue team setup first then red team) ===\n");
@@ -24,11 +26,11 @@ int main() {
                 break;
             case 2:
                 printf("Top Spymaster feature coming soon!\n");
-                wordRandom(output);
+                selectCard(maxFiles, &filesFound);
+        		break;
+        		case 3:wordRandom(output);
 				loadWords(&game, output);
-                displayBoard(&game);
-        		
-                
+                displayBoard(&game);                
                 break;
             case 0:
                 printf("Goodbye!\n");
